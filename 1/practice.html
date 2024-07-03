@@ -1,0 +1,42 @@
+<!-- 태그 속성? 형식? 헷갈리는 거 보면 html 복습? js 복습? -->
+<!-- 강의 하나 끝날 때마다 코드 따로 저장해놓기 최종 코드만 보니까 과정 헷갈림 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <body>
+    <div id="root">
+      
+    </div>
+  </body>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script>
+      // import { useState, useEffect } from "react";
+
+
+      function Hello(){
+          return <h1>Hello</h1>
+      }
+
+      function App(){
+          const[showing, setShowing] = useState(false);
+          const onClick=()=> setShowing(prev=>!prev);
+
+
+          return (
+          <div>
+              {showing ? <Hello /> : null}
+              <button onClick={onClick}>{showing ? "Hide" : "show"}</button>
+          </div>
+          )
+      }
+
+      ReactDOM.render(<App/>,rood);
+    </script>
+
+
+</html>

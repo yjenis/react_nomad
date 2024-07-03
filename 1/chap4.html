@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <!-- html 보여지는 요소 -->
+    <div id="root">
+      <!-- <h3></h3> -->
+      <!-- <button>click me</button> -->
+    </div>
+  </body>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // props는 첫 번째이자 유일한 인자. Btn이 전달 받는 유일한 인자
+    function Btn({ text, fontSize= 12 }) {
+      return (
+        <button 
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 0,
+            fontSize: fontSize,
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number.isRequired,
+    };
+
+    function App() {
+      return (
+        <div>       
+          <Btn text="Save Changes" fontSize={18} />
+          <Btn text="Continue" /> 
+        </div>
+      );
+    }
+
+    // root라는 id를 가진 div 요소에 React 컴포넌트를 렌더링
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

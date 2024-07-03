@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <!-- html 보여지는 요소 -->
+    <div id="root">
+      <!-- <h3></h3> -->
+      <!-- <button>click me</button> -->
+    </div>
+  </body>
+
+    
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  
+  <script type="text/babel">
+    const root=document.getElementById("root");
+    // 위에 html은 없어도 되는 건가 js에서 html과 js 역할 동시에 하는 것 같음
+
+    function MinutesToHours(){
+      // const는 불변 let은 가변
+      // useState()활용할 때, 첫번째 원소는 현재상태이고 두번째 원소는 해당 변수명을 갖는 함수
+      //  /////////////////정의 영역
+      const [amount, setAmount] = React.useState(0);
+      const [flipped,setFlipped]=React.useState(false);
+
+      const onChange=(event)=>{
+        setAmount(event.target.value);
+      };
+      const reset=()=>setAmount(0);
+      const onFlip=()=>{
+        reset()
+        setFlipped((current)=>!current)
+      };
+
+      // //////////////return 영역
+      return (
+        <div>
+          
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input 
+            value={flipped ? amount*60 : amount} 
+            id="minutes" 
+            placeholder="Minutes" 
+            type="number"
+            onChange={onChange}
+            disabled={flipped===true}/>
+          </div>
+        
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input 
+            value={flipped ? amount : Math.round(amount/60)}
+            id="hours" 
+            placeholder="Hours" 
+            type="number"
+            onChange={onChange}
+            disabled={flipped===false}/>
+          </div>  
+
+          <div>
+            <button onClick={reset}>Reset</button>
+            <button onClick={onFlip}>Flipped</button>
+          </div>
+          
+        </div>
+      );
+    }
+    function KmToMiles(){
+      return <h3>KM 2 M</h3>
+    }    
+
+    function App(){
+      // const는 불변 let은 가변
+      // useState()활용할 때, 첫번째 원소는 현재상태이고 두번째 원소는 해당 변수명을 갖는 함수
+      //  /////////////////정의 영역
+      const [index, setIndex]=React.useState("xx")
+      // useState는 array를 제공
+      // 첫 번째는 data
+      // 두 번째는  modifier 함수
+      // modifier 함수를 실행할 땐 모든 컴포넌트들이 다시 렌더링 됨
+
+      
+      const onSelect=(event)=>{
+        console.log(event.target.value);
+        setIndex(event.target.value);
+      }
+      // //////////////return 영역
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select your units</option>
+            <option value="0">Minutes&Hours</option>
+            <option value="1">Kim&Miles</option>  
+          </select>
+          <hr/>
+          {index ==="xx"? "Please select your units" : null}
+          {index === "0" ? <MinutesToHours/> : null}
+          {index === "1" ? <KmToMiles/> : null}
+        </div>
+      );
+    }
+          
+    // root라는 id를 가진 div 요소에 React 컴포넌트를 렌더링
+    ReactDOM.render(<App/>, root);
+    
+
+
+  </script>
+</html>
